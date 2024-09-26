@@ -1,0 +1,40 @@
+npm init -y
+- Cria o arquivo package.json
+
+npm install -D tsc typescript ts-node-dev
+- Instala o typescript e o ts-node como dependência de desenvolvimento
+
+npm tsc --init
+- Cria o arquivo tsconfig.json
+
+"start:dev": "ts-node-dev --respawn --transpile-only src/" // package.json
+- Assiste todos os arquivos da pasta src e executa o arquivo index.ts com ts-node a qualquer alteração
+
+npm i -D eslint prettier eslint-config-prettier
+- Instala o eslint, o prettier e a configuração do eslint com o prettier como dependência de desenvolvimento
+
+npx eslint --init
+A. To Check syntax, find problems
+B. JavaScript modules (import/export)
+C. None of these
+D. Yes
+E. Node
+- Inicia a configuração do eslint
+
+npm i express
+
+npm i -D @types/express
+
+npm i -D @types/node
+
+npm i -D dotenv
+
+npm i mongodb
+
+npm i --save-dev @types/cors
+
+
+docker: 
+docker-compose up --build
+docker-compose up -d
+

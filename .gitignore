@@ -1,0 +1,7 @@
+# Geral
+node_modules
+dist
+
+
+# Ambiente
+.env
