@@ -66,7 +66,7 @@ Ao clicar em salvar, se todos os dados estiverem corretos você conseguirá cone
 
 <div align="center">
   
-![ModeloDoBanco](./docs/OnTask(TCC)ModelagemDoBanco.png)
+![ModeloDoBanco](./docs/OnTask(TCC)ModelagemDoBanco.png.png)
 
 </div>
 <hr>
