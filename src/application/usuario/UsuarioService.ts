@@ -58,6 +58,13 @@ export default class UsuarioService {
     pRegistro: AtualizarUsuarioDTO
   ): Promise<UsuarioModel> {
     try {
+      if (pRegistro.senha) {
+        // Criptografa a senha
+        pRegistro.senha = await BCryptEncoderPassword.criptografarSenha(
+          pRegistro.senha
+        )
+      }
+
       const updatedUsuario = await this.usuarioRepository.atualizar(
         pId,
         pRegistro.toDomain()

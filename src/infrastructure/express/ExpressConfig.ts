@@ -6,12 +6,13 @@ import bodyParser from 'body-parser'
 // Shared
 import Logger from '../../shared/utils/Logger'
 
+// Middlewares
+import errorHandler from './middleware/ErrorHandler'
+
 // Routes
 import AuthRoutes from './routes/AuthRoutes'
 import UsuarioRoutes from './routes/UsuarioRoutes'
-
-// Middlewares
-import errorHandler from './middleware/ErrorHandler'
+import TipoStatusRoutes from './routes/TipoStatusRoute'
 
 export default class ExpressConfig {
   private readonly porta: number
@@ -55,7 +56,7 @@ export default class ExpressConfig {
 
     this.app.use(`${basePath}/auth`, AuthRoutes)
     this.app.use(`${basePath}/usuario`, UsuarioRoutes)
-
+    this.app.use(`${basePath}/tipoStatus`, TipoStatusRoutes)
     // ...
 
     this.app.get('/', (req, res) => {
