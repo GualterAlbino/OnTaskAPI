@@ -31,6 +31,9 @@ export default class UsuarioEntity implements TUsuarioModel {
   @Column({ name: 'role', length: 255, nullable: false })
   role!: string
 
+  @Column({ name: 'imagem', length: 255, nullable: true })
+  imagem!: string
+
   @CreateDateColumn({ name: 'criadoEm' })
   criadoEm!: Date
 

@@ -1,13 +1,12 @@
 import BaseModel from '../base/BaseModel'
+import TBaseModel from '../base/BaseTipoModel'
 
-export type TUsuarioModel = {
-  id: string
+export type TUsuarioModel = TBaseModel & {
   nome: string
   role: string
   senha: string
   email: string
-  criadoEm: Date
-  alteradoEm: Date
+  imagem: string
 }
 
 export default class UsuarioModel
@@ -19,6 +18,9 @@ export default class UsuarioModel
 
   @BaseModel.Required
   senha: string = ''
+
+  @BaseModel.Optional
+  imagem: string = ''
 
   @BaseModel.Required
   private _role: string = ''
@@ -42,6 +44,7 @@ export default class UsuarioModel
     this.role = pObjeto.role || this._role
     this.senha = pObjeto.senha || this.senha
     this.email = pObjeto.email || this._email
+    this.imagem = pObjeto.imagem || this.imagem
 
     if (pValidarCadastro) {
       BaseModel.validate(this)
