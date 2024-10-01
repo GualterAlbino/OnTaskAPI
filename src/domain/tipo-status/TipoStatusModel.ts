@@ -11,10 +11,16 @@ export default class TipoStatusModel
   implements TTipoStatusModel
 {
   @BaseModel.Required
-  tipo: string = ''
+  descricao: string = ''
 
   @BaseModel.Required
-  descricao: string = ''
+  private _tipo: string = ''
+
+  public static readonly ETipoAtividade = {
+    ATIVIDADE: 'ATIVIDADE',
+    PROJETO: 'PROJETO',
+    USUARIO: 'USUARIO'
+  } as const
 
   constructor(
     pObjeto: Partial<TipoStatusModel>,
@@ -28,5 +34,25 @@ export default class TipoStatusModel
     if (pValidarCadastro) {
       BaseModel.validate(this)
     }
+  }
+
+  //-------
+  // Tipo de Status
+  //-------
+
+  get tipo() {
+    return this._tipo
+  }
+
+  set tipo(pValor: string) {
+    if (!pValor || pValor.trim() === '') {
+      throw `O tipo de atividade não pode ser vazio! As atividades válidas são: ${Object.keys(TipoStatusModel.ETipoAtividade).join(', ')}`
+    }
+
+    if (!(pValor.toUpperCase() in TipoStatusModel.ETipoAtividade)) {
+      throw `O tipo de atividade:[${pValor}] não é permitida! As atividades válidas são: ${Object.keys(TipoStatusModel.ETipoAtividade).join(', ')}`
+    }
+
+    this._tipo = pValor.toUpperCase()
   }
 }

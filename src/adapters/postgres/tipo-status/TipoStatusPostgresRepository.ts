@@ -12,8 +12,11 @@ import Logger from '../../../shared/utils/Logger'
 import PostgresConfig from '../../../infrastructure/postgres/PostgresConfig'
 import { validarUUID } from '../../../infrastructure/postgres/utils/ValidateStringUUID'
 import TipoStatusEntity from '../../../infrastructure/postgres/entities/TipoStatusEntity'
+import { queryBuilderPostgres } from '../../../infrastructure/postgres/utils/QueryBuilderPostgres'
 
-export default class UsuarioPostgresRepository implements TipoStatusRepository {
+export default class TipoStatusPostgresRepository
+  implements TipoStatusRepository
+{
   private readonly logger: Logger
   private readonly repository: Repository<TipoStatusEntity>
 
@@ -30,11 +33,9 @@ export default class UsuarioPostgresRepository implements TipoStatusRepository {
   // Método para buscar usuários
   async buscar(pParams: Partial<TipoStatusModel>): Promise<TipoStatusModel[]> {
     try {
-      if (pParams.id) {
-        validarUUID<TipoStatusModel>(pParams.id, 'id')
-      }
+      const query = queryBuilderPostgres<TipoStatusModel>(pParams)
 
-      const registros = await this.repository.find({ where: pParams })
+      const registros = await this.repository.find({ where: query })
       return registros.map((registro) => new TipoStatusModel(registro))
     } catch (error) {
       this.logger.error(error)
