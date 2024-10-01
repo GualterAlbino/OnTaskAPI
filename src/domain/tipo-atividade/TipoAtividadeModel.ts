@@ -4,7 +4,7 @@ import TBaseModel from '../base/BaseTipoModel'
 export type TTipoAtividadeModel = TBaseModel & {
   nome: string
   descricao: string
-  usuarioId: string
+  grupoId: string
 }
 
 export default class TipoAtividadeModel
@@ -15,7 +15,7 @@ export default class TipoAtividadeModel
   nome: string = ''
 
   @BaseModel.Required
-  usuarioId: string = ''
+  grupoId: string = ''
 
   @BaseModel.Required
   descricao: string = ''
@@ -27,7 +27,7 @@ export default class TipoAtividadeModel
     super(pObjeto, pValidarCadastro)
 
     this.nome = pObjeto.nome || this.nome
-    this.usuarioId = pObjeto.usuarioId || this.usuarioId
+    this.grupoId = pObjeto.grupoId || this.grupoId
     this.descricao = pObjeto.descricao || this.descricao
 
     if (pValidarCadastro) {

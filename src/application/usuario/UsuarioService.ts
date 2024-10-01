@@ -58,26 +58,30 @@ export default class UsuarioService {
     pRegistro: AtualizarUsuarioDTO
   ): Promise<UsuarioModel> {
     try {
-      if (pRegistro.senha) {
-        // Criptografa a senha
-        pRegistro.senha = await BCryptEncoderPassword.criptografarSenha(
-          pRegistro.senha
+      // Convertendo o DTO para o modelo de domínio aplicando as regras de negócio
+      const registro = pRegistro.toDomain()
+
+      // Criptografa a senha, se for fornecida
+      if (registro.senha) {
+        registro.senha = await BCryptEncoderPassword.criptografarSenha(
+          registro.senha
         )
       }
 
-      const updatedUsuario = await this.usuarioRepository.atualizar(
+      // Atualiza o usuário com os novos valores
+      const updatedRegistro = await this.usuarioRepository.atualizar(
         pId,
-        pRegistro.toDomain()
+        registro
       )
 
-      if (!updatedUsuario) {
+      if (!updatedRegistro) {
         throw new UsuarioNotFoundException(
           '',
-          'Usuário não encontrado para atualização!'
+          'Registro não encontrado para atualização!'
         )
       }
 
-      return updatedUsuario
+      return updatedRegistro
     } catch (error) {
       this.logger.error(error)
       throw new UsuarioInternalServicException(
@@ -89,6 +93,7 @@ export default class UsuarioService {
 
   async buscar(pParams: QueryUsuarioDTO): Promise<UsuarioModel[]> {
     try {
+   
       const usuarios = await this.usuarioRepository.buscar(pParams)
 
       return usuarios

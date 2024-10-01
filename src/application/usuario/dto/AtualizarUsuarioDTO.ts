@@ -14,14 +14,16 @@ export default class AtualizarUsuarioDTO extends BaseDTO {
   @BaseDTO.Optional
   senha: string
 
-  constructor(pUsuario: UsuarioModel, pValidarCadastro: boolean = true) {
+  constructor(pUsuario: UsuarioModel, pValidarCadastro: boolean = false) {
     super(pUsuario)
     this.nome = pUsuario.nome
     this.role = pUsuario.role
     this.email = pUsuario.email
     this.senha = pUsuario.senha
 
-    BaseDTO.validate(this)
+    if (pValidarCadastro) {
+      BaseDTO.validate(this)
+    }
   }
 
   toDomain() {

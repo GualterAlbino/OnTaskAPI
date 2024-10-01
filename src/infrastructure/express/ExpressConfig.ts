@@ -11,8 +11,10 @@ import errorHandler from './middleware/ErrorHandler'
 
 // Routes
 import AuthRoutes from './routes/AuthRoutes'
+import StatusRoutes from './routes/StatusRoutes'
 import UsuarioRoutes from './routes/UsuarioRoutes'
-import TipoStatusRoutes from './routes/TipoStatusRoute'
+import TipoStatusRoutes from './routes/TipoStatusRoutes'
+import GrupoRoutes from './routes/GrupoRoutes'
 
 export default class ExpressConfig {
   private readonly porta: number
@@ -55,6 +57,8 @@ export default class ExpressConfig {
     const basePath = '/v1'
 
     this.app.use(`${basePath}/auth`, AuthRoutes)
+    this.app.use(`${basePath}/grupo`, GrupoRoutes)
+    this.app.use(`${basePath}/status`, StatusRoutes)
     this.app.use(`${basePath}/usuario`, UsuarioRoutes)
     this.app.use(`${basePath}/tipoStatus`, TipoStatusRoutes)
     // ...

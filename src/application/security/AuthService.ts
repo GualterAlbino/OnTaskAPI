@@ -2,12 +2,18 @@
 import jwt from 'jsonwebtoken'
 
 // Application
+import SessaoAuthDTO from './dto/SessaoAuthDTO'
 import RequestAuthDTO from './dto/RequestAuthDTO'
 import ResponseAuthDTO from './dto/ResponseAuthDTO'
+import QueryUsuarioDTO from '../usuario/dto/QueryUsuarioDTO'
+import QueryGrupoUsuarioDTO from '../grupo-usuario/dto/QueryGrupoUsuarioDTO'
+
+import UsuarioService from '../usuario/UsuarioService'
+import GrupoUsuarioService from '../grupo-usuario/GrupoUsuarioService'
 
 // Domain
 import UsuarioModel from '../../domain/usuario/UsuarioModel'
-import UsuarioRepository from '../../domain/usuario/UsuarioRepository'
+import GrupoUsuarioModel from '../../domain/grupo-usuario/GrupoUsuarioModel'
 
 // Shared
 import Logger from '../../shared/utils/Logger'
@@ -15,24 +21,27 @@ import Logger from '../../shared/utils/Logger'
 // Infrastructure
 import BCryptEncoderPassword from '../../infrastructure/bcrypt/BCryptEncoderPassword'
 import TokenJWTConfig from '../../infrastructure/express/security/TokenJWTConfig'
-import {
-  SecurityForbiddenException,
-  SecurityUnauthorizedException
-} from './exceptions/SecurityException'
+import { SecurityUnauthorizedException } from './exceptions/SecurityException'
 
 export default class AuthService {
-  private readonly usuarioRepository: UsuarioRepository
+  private readonly usuarioService: UsuarioService
+  private readonly grupoUsuarioService: GrupoUsuarioService
+
   private readonly logger = new Logger(this.constructor.name)
 
-  constructor(pUsuarioRepository: UsuarioRepository) {
-    this.usuarioRepository = pUsuarioRepository
+  constructor(
+    pUsuarioService: UsuarioService,
+    pGrupoUsuarioService: GrupoUsuarioService
+  ) {
+    ;(this.usuarioService = pUsuarioService),
+      (this.grupoUsuarioService = pGrupoUsuarioService)
   }
 
   async login(pRequestAuth: RequestAuthDTO): Promise<ResponseAuthDTO> {
     try {
-      const usuarios = await this.usuarioRepository.buscar({
-        email: pRequestAuth.email
-      })
+      const usuarios = await this.usuarioService.buscar(
+        new QueryUsuarioDTO({ email: pRequestAuth.email })
+      )
 
       // Verifica se o usuário existe
       if (usuarios.length === 0) {
@@ -52,7 +61,14 @@ export default class AuthService {
         throw new SecurityUnauthorizedException('', 'Credenciais Incorretas!')
       }
 
-      const token = this.gerarToken(usuarios[0])
+      // Busca os grupos associados ao usuário
+      const grupos = await this.grupoUsuarioService.buscar(
+        new QueryGrupoUsuarioDTO({ usuarioId: usuarios[0].id })
+      )
+
+      console.log(grupos)
+
+      const token = this.gerarToken(usuarios[0], grupos)
       return new ResponseAuthDTO(token, new Date(), new Date())
     } catch (error) {
       this.logger.error(error)
@@ -63,12 +79,16 @@ export default class AuthService {
     }
   }
 
-  gerarToken(pUsuario: UsuarioModel): string {
+  gerarToken(pUsuario: UsuarioModel, pGrupos: GrupoUsuarioModel[]): string {
     try {
-      const infoToken = {
+      const infoToken: SessaoAuthDTO = {
         id: pUsuario.id,
+        nome: pUsuario.nome,
         role: pUsuario.role,
-        email: pUsuario.email
+        email: pUsuario.email,
+        grupos: pGrupos.length > 0 ? pGrupos.map((grupo) => grupo.id) : [],
+        criadoEm: new Date(),
+        alteradoEm: new Date()
       }
 
       return jwt.sign(infoToken, TokenJWTConfig.secretJWT, {

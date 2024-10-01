@@ -1,7 +1,6 @@
 import {
   Column,
   Entity,
-  Unique,
   CreateDateColumn,
   UpdateDateColumn,
   PrimaryGeneratedColumn,
@@ -15,7 +14,7 @@ import { TTipoAtividadeModel } from '../../../domain/tipo-atividade/TipoAtividad
 import { cTABELA_TIPO_ATIVIDADE } from '../constants/ConstantesPostgres'
 
 // Entities
-import UsuarioEntity from './UsuarioEntity'
+import GrupoEntity from './GrupoEntity'
 
 @Entity({ name: cTABELA_TIPO_ATIVIDADE })
 export default class TipoAtividadeEntity implements TTipoAtividadeModel {
@@ -29,9 +28,9 @@ export default class TipoAtividadeEntity implements TTipoAtividadeModel {
   descricao!: string
 
   // Relacionamentos
-  @ManyToOne(() => UsuarioEntity, (usuario) => usuario.id)
-  @Column({ name: 'usuarioId', length: 255, nullable: false })
-  usuarioId!: string
+  @ManyToOne(() => GrupoEntity, (grupo) => grupo.id)
+  @Column({ name: 'grupoId', length: 255, nullable: false })
+  grupoId!: string
 
   // Padrão
   @CreateDateColumn({ name: 'criadoEm' })
