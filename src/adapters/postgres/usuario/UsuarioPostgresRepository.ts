@@ -12,6 +12,7 @@ import Logger from '../../../shared/utils/Logger'
 import PostgresConfig from '../../../infrastructure/postgres/PostgresConfig'
 import UsuarioEntity from '../../../infrastructure/postgres/entities/UsuarioEntity'
 import { validarUUID } from '../../../infrastructure/postgres/utils/ValidateStringUUID'
+import { queryBuilderPostgres } from '../../../infrastructure/postgres/utils/QueryBuilderPostgres'
 
 export default class UsuarioPostgresRepository implements UsuarioRepository {
   private readonly logger: Logger
@@ -30,11 +31,11 @@ export default class UsuarioPostgresRepository implements UsuarioRepository {
   // Método para buscar usuários
   async buscar(pParams: Partial<UsuarioModel>): Promise<UsuarioModel[]> {
     try {
-      // if (pParams.id) {
-      //   validarUUID<UsuarioModel>(pParams.id, 'id')
-      // }
+      const query = queryBuilderPostgres<UsuarioModel>(pParams)
 
-      const usuarios = await this.usuarioRepository.find({ where: pParams })
+      const usuarios = await this.usuarioRepository.find({ where: query })
+      console.log(usuarios)
+
       return usuarios.map((usuario) => new UsuarioModel(usuario))
     } catch (error) {
       this.logger.error(error)
