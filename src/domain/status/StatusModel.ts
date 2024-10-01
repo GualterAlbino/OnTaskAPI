@@ -3,7 +3,7 @@ import TBaseModel from '../base/BaseTipoModel'
 
 export type TStatusModel = TBaseModel & {
   status: string
-  usuarioId: string
+  grupoId: string
   descricao: string
   tipoStatusId: string
 }
@@ -19,16 +19,16 @@ export default class StatusModel
   status: string = ''
 
   @BaseModel.Required
-  usuarioId: string = ''
+  tipoStatusId: string = ''
 
   @BaseModel.Required
-  tipoStatusId: string = ''
+  grupoId: string = ''
 
   constructor(pObjeto: Partial<StatusModel>, pValidarCadastro: boolean = true) {
     super(pObjeto, pValidarCadastro)
 
     this.status = pObjeto.status || this.status
-    this.usuarioId = pObjeto.usuarioId || this.usuarioId
+    this.grupoId = pObjeto.grupoId || this.grupoId
     this.descricao = pObjeto.descricao || this.descricao
     this.tipoStatusId = pObjeto.tipoStatusId || this.tipoStatusId
 

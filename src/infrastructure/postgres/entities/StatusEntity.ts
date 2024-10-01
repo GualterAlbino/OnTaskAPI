@@ -1,11 +1,10 @@
 import {
   Column,
   Entity,
-  Unique,
+  ManyToOne,
   CreateDateColumn,
   UpdateDateColumn,
-  PrimaryGeneratedColumn,
-  ManyToOne
+  PrimaryGeneratedColumn
 } from 'typeorm'
 
 // Domain
@@ -15,7 +14,7 @@ import { TStatusModel } from '../../../domain/status/StatusModel'
 import { cTABELA_STATUS } from '../constants/ConstantesPostgres'
 
 // Entities
-import UsuarioEntity from './UsuarioEntity'
+import GrupoEntity from './GrupoEntity'
 import TipoStatusEntity from './TipoStatusEntity'
 
 @Entity({ name: cTABELA_STATUS })
@@ -29,12 +28,14 @@ export default class StatusEntity implements TStatusModel {
   @Column({ name: 'descricao', length: 255, nullable: false })
   descricao!: string
 
-  @ManyToOne(() => UsuarioEntity, (usuario) => usuario.id)
-  @Column({ name: 'usuarioId', length: 255, nullable: false })
-  usuarioId!: string
-
+  //Relacionamentos
   @ManyToOne(() => TipoStatusEntity, (tipoStatus) => tipoStatus.id)
+  @Column({ name: 'tipoStatusId', length: 255, nullable: false })
   tipoStatusId!: string
+
+  @ManyToOne(() => GrupoEntity, (grupo) => grupo.id)
+  @Column({ name: 'grupoId', length: 255, nullable: false })
+  grupoId!: string
 
   @CreateDateColumn({ name: 'criadoEm' })
   criadoEm!: Date
