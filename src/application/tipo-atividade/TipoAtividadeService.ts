@@ -14,7 +14,7 @@ import {
   TipoAtividadeInternalServicException
 } from './exceptions/TipoAtividadeExceptions'
 
-export default class TipoStatusService {
+export default class TipoAtividadeService {
   private readonly respository: TipoAtividadeRepository
   private readonly logger = new Logger(this.constructor.name)
 

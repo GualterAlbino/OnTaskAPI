@@ -42,7 +42,7 @@ export default class AtividadeModel
   @BaseModel.Required
   descricao: string = ''
 
-  @BaseModel.Required
+  @BaseModel.Optional
   emExecucao: boolean = false
 
   @BaseModel.Required

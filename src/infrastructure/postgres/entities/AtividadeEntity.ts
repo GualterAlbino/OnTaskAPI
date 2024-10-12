@@ -1,11 +1,9 @@
 import {
   Column,
   Entity,
-  Unique,
   CreateDateColumn,
   UpdateDateColumn,
-  PrimaryGeneratedColumn,
-  ManyToOne
+  PrimaryGeneratedColumn
 } from 'typeorm'
 
 // Domain
@@ -15,12 +13,6 @@ import { TAtividadeModel } from '../../../domain/atividade/AtividadeModel'
 import { cTABELA_ATIVIDADE } from '../constants/ConstantesPostgres'
 
 // Entities
-import UsuarioEntity from './UsuarioEntity'
-import TipoStatusEntity from './TipoStatusEntity'
-import ProjetoEntity from './ProjetoEntity'
-import TipoAtividadeEntity from './TipoAtividadeEntity'
-import StatusEntity from './StatusEntity'
-import DificuldadeAtividadeEntity from './DificuldadeAtividadeEntity'
 
 @Entity({ name: cTABELA_ATIVIDADE })
 export default class AtividadeEntity implements TAtividadeModel {
@@ -52,22 +44,19 @@ export default class AtividadeEntity implements TAtividadeModel {
   tempoEstimadoMinutos!: number
 
   //Relaciaonamentos
-  @ManyToOne(() => UsuarioEntity, (usuario) => usuario.id)
+  @Column({ name: 'usuarioId', type: 'uuid' })
   usuarioId!: string
 
-  @ManyToOne(() => ProjetoEntity, (projeto) => projeto.id)
+  @Column({ name: 'projetoId', type: 'uuid' })
   projetoId!: string
 
-  @ManyToOne(() => StatusEntity, (status) => status.id)
+  @Column({ name: 'statusId', type: 'uuid' })
   statusId!: string
 
-  @ManyToOne(() => TipoAtividadeEntity, (tipoAtividade) => tipoAtividade.id)
+  @Column({ name: 'tipoAtividadeId', type: 'uuid' })
   tipoAtividadeId!: string
 
-  @ManyToOne(
-    () => DificuldadeAtividadeEntity,
-    (dificuldadeAtividade) => dificuldadeAtividade.id
-  )
+  @Column({ name: 'dificuldadeAtividadeId', type: 'uuid' })
   dificuldadeAtividadeId!: string
 
   // Padrão
