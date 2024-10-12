@@ -14,7 +14,7 @@ export default class TipoAtividadeModel
   @BaseModel.Required
   nome: string = ''
 
-  @BaseModel.Required
+  @BaseModel.Optional
   grupoId: string = ''
 
   @BaseModel.Required

@@ -28,8 +28,7 @@ export default class TipoAtividadeEntity implements TTipoAtividadeModel {
   descricao!: string
 
   // Relacionamentos
-  @ManyToOne(() => GrupoEntity, (grupo) => grupo.id)
-  @Column({ name: 'grupoId', length: 255, nullable: false })
+  @Column({ name: 'grupoId', type: 'uuid' })
   grupoId!: string
 
   // Padrão
