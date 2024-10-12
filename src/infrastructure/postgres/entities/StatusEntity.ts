@@ -29,12 +29,10 @@ export default class StatusEntity implements TStatusModel {
   descricao!: string
 
   //Relacionamentos
-  @ManyToOne(() => TipoStatusEntity, (tipoStatus) => tipoStatus.id)
-  @Column({ name: 'tipoStatusId', length: 255, nullable: false })
+  @Column({ name: 'tipoStatusId', type: 'uuid' })
   tipoStatusId!: string
 
-  @ManyToOne(() => GrupoEntity, (grupo) => grupo.id)
-  @Column({ name: 'grupoId', length: 255, nullable: false })
+  @Column({ name: 'grupoId', type: 'uuid' })
   grupoId!: string
 
   @CreateDateColumn({ name: 'criadoEm' })

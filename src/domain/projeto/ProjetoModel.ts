@@ -7,6 +7,7 @@ export type TProjetoModel = TBaseModel & {
   inicio: Date
   termino: Date
   statusId: string
+  grupoId: string
   descricao: string
   previsaoInicio: Date
   previsaoTermino: Date
@@ -44,6 +45,9 @@ export default class ProjetoModel
   @BaseModel.Required
   usuarioResponsavelId: string = ''
 
+  @BaseModel.Required
+  grupoId: string = ''
+
   constructor(
     pObjeto: Partial<ProjetoModel>,
     pValidarCadastro: boolean = true
@@ -60,6 +64,7 @@ export default class ProjetoModel
     this.previsaoTermino = pObjeto.previsaoTermino || this.previsaoTermino
     this.usuarioResponsavelId =
       pObjeto.usuarioResponsavelId || this.usuarioResponsavelId
+    this.grupoId = pObjeto.grupoId || this.grupoId
 
     if (pValidarCadastro) {
       BaseModel.validate(this)

@@ -44,12 +44,13 @@ export default class ProjetoEntity implements TProjetoModel {
   previsaoTermino!: Date
 
   //Relacionamentos
-  @ManyToOne(() => StatusEntity, (status) => status.id)
-  @Column({ name: 'statusId', length: 255, nullable: false })
+  @Column({ name: 'statusId', type: 'uuid' })
   statusId!: string
 
-  @ManyToOne(() => UsuarioEntity, (usuario) => usuario.id)
-  @Column({ name: 'usuarioResponsavelId', length: 255, nullable: false })
+  @Column({ name: 'grupoId', type: 'uuid' })
+  grupoId!: string
+
+  @Column({ name: 'usuarioResponsavelId', type: 'uuid' })
   usuarioResponsavelId!: string
 
   // Padrão

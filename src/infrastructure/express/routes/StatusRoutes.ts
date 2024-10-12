@@ -45,7 +45,7 @@ StatusRoutes.post('/', authMiddleware, (req, res, next) =>
 
 /**
  * @swagger
- * /tipoStatus/{id}:
+ * /status/{id}:
  *   delete:
  *     summary: Exclui um registro
  *     tags: [Status]
@@ -56,7 +56,7 @@ StatusRoutes.delete('/:id', authMiddleware, (req, res, next) =>
 
 /**
  * @swagger
- * /tipoStatus/{id}:
+ * /status/{id}:
  *   patch:
  *     summary: Atualiza um registro
  *     tags: [Status]

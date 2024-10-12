@@ -53,7 +53,7 @@ GrupoRoutes.post('/', authMiddleware, (req, res, next) =>
 
 /**
  * @swagger
- * /tipoStatus/{id}:
+ * /grupo/{id}:
  *   delete:
  *     summary: Exclui um registro
  *     tags: [Grupo]
@@ -64,7 +64,7 @@ GrupoRoutes.delete('/:id', authMiddleware, (req, res, next) =>
 
 /**
  * @swagger
- * /tipoStatus/{id}:
+ * /grupo/{id}:
  *   patch:
  *     summary: Atualiza um registro
  *     tags: [Grupo]

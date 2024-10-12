@@ -6,6 +6,9 @@ export default class CriarStatusDTO extends BaseDTO {
   tipoStatusId: string
 
   @BaseDTO.Required
+  grupoId: string
+
+  @BaseDTO.Required
   status: string
 
   @BaseDTO.Required
@@ -17,6 +20,7 @@ export default class CriarStatusDTO extends BaseDTO {
     this.status = pObjeto.status
     this.descricao = pObjeto.descricao
     this.tipoStatusId = pObjeto.tipoStatusId
+    this.grupoId = pObjeto.grupoId
 
     if (pValidarCadastro) {
       BaseDTO.validate(this)
@@ -27,6 +31,7 @@ export default class CriarStatusDTO extends BaseDTO {
     return new StatusModel(
       {
         status: this.status,
+        grupoId: this.grupoId,
         descricao: this.descricao,
         tipoStatusId: this.tipoStatusId
       },
