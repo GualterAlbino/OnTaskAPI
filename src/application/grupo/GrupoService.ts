@@ -8,10 +8,10 @@ import Logger from '../../shared/utils/Logger'
 //Application
 import QueryGrupoDTO from './dto/QueryGrupoDTO'
 import CriarGrupoDTO from './dto/CriarGrupoDTO'
+import UsuarioService from '../usuario/UsuarioService'
 import AtualizarGrupoDTO from './dto/AtualizarGrupoDTO'
 import SessaoAuthDTO from '../security/dto/SessaoAuthDTO'
 import CriarGrupoUsuarioDTO from '../grupo-usuario/dto/CriarGrupoUsuarioDTO'
-
 import GrupoUsuarioService from '../grupo-usuario/GrupoUsuarioService'
 
 import {
@@ -19,6 +19,7 @@ import {
   GrupoInternalServicException,
   GrupoForbiddenException
 } from './exceptions/GrupoExceptions'
+import QueryUsuarioDTO from '../usuario/dto/QueryUsuarioDTO'
 
 export default class GrupoService {
   private readonly grupoRepository: GrupoRepository
@@ -39,7 +40,9 @@ export default class GrupoService {
   ): Promise<GrupoModel> {
     try {
       // Inclui o grupo
-      const grupo = await this.grupoRepository.incluir(pRegistro.toDomain())
+      const registro = pRegistro.toDomain()
+      registro.usuarioResponsavelId = pSessao.id
+      const grupo = await this.grupoRepository.incluir(registro)
 
       // Inclui o usuário no grupo
       await this.grupoUsuarioService.incluir(
@@ -111,6 +114,8 @@ export default class GrupoService {
 
   async excluir(pId: string): Promise<GrupoModel> {
     try {
+      this.grupoUsuarioService.excluir(pId)
+
       const registro = await this.grupoRepository.excluir(pId)
 
       if (!registro) {

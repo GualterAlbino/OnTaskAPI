@@ -4,7 +4,8 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   PrimaryGeneratedColumn,
-  JoinColumn
+  JoinColumn,
+  Column
 } from 'typeorm'
 
 // Domain
@@ -22,17 +23,12 @@ export default class GrupoUsuarioEntity implements TGrupoUsuarioModel {
   @PrimaryGeneratedColumn('uuid')
   id!: string
 
-  // Relacionamento com o GrupoEntity
-  @ManyToOne(() => GrupoEntity, (grupo) => grupo.id)
-  @JoinColumn({ name: 'grupoId' })
+  @Column({ name: 'grupoId', type: 'uuid' })
   grupoId!: string
 
-  // Relacionamento com o UsuarioEntity
-  @ManyToOne(() => UsuarioEntity, (usuario) => usuario.id)
-  @JoinColumn({ name: 'usuarioId' })
+  @Column({ name: 'usuarioId', type: 'uuid' })
   usuarioId!: string
 
-  // Padrão
   @CreateDateColumn({ name: 'criadoEm' })
   criadoEm!: Date
 

@@ -17,7 +17,7 @@ export default class GrupoModel
   @BaseModel.Required
   descricao: string = ''
 
-  @BaseModel.Required
+  @BaseModel.Optional
   usuarioResponsavelId: string = ''
 
   constructor(pObjeto: Partial<GrupoModel>, pValidarCadastro: boolean = true) {

@@ -10,14 +10,21 @@ import GrupoController from '../../../adapters/http/grupo/GrupoController'
 import GrupoPostgresRepository from '../../../adapters/postgres/grupo/GrupoPostgresRepository'
 import GrupoUsuarioPostgresRepository from '../../../adapters/postgres/grupo-usuario/GrupoUsuarioPostgresRepository'
 import GrupoUsuarioService from '../../../application/grupo-usuario/GrupoUsuarioService'
+import UsuarioPostgresRepository from '../../../adapters/postgres/usuario/UsuarioPostgresRepository'
+import UsuarioService from '../../../application/usuario/UsuarioService'
 
 const GrupoRoutes = Router()
 
 const grupoRepository = new GrupoPostgresRepository()
 const grupoUsuarioRepository = new GrupoUsuarioPostgresRepository()
 
+
 const grupoUsuarioService = new GrupoUsuarioService(grupoUsuarioRepository)
-const grupoService = new GrupoService(grupoRepository, grupoUsuarioService)
+const grupoService = new GrupoService(
+  grupoRepository,
+  grupoUsuarioService
+
+)
 
 const grupoHandler = new GrupoHandler(grupoService)
 const grupoController = new GrupoController(grupoHandler)

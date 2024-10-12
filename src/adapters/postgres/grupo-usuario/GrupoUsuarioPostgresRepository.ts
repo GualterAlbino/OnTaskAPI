@@ -13,7 +13,6 @@ import PostgresConfig from '../../../infrastructure/postgres/PostgresConfig'
 import { validarUUID } from '../../../infrastructure/postgres/utils/ValidateStringUUID'
 import GrupoUsuarioEntity from '../../../infrastructure/postgres/entities/GrupoUsuarioEntity'
 import { queryBuilderPostgres } from '../../../infrastructure/postgres/utils/QueryBuilderPostgres'
-import { console } from 'inspector'
 
 export default class GrupoUsuarioPostgresRepository
   implements GrupoUsuarioRepository
@@ -31,16 +30,20 @@ export default class GrupoUsuarioPostgresRepository
       .getRepository(GrupoUsuarioEntity)
   }
 
-  // Método para buscar
   async buscar(
     pParams: Partial<GrupoUsuarioModel>
   ): Promise<GrupoUsuarioModel[]> {
     try {
       const query = queryBuilderPostgres<GrupoUsuarioModel>(pParams)
 
-      console.log(query)
+      // Buscando diretamente com o where, sem fazer a busca duas vezes
+      const registros = await this.repository.find({ where: query })
 
-      const registros = await this.repository.find()
+      if (registros.length === 0) {
+        return []
+      }
+
+      // Mapeando os resultados para o modelo correto
       return registros.map((registro) => new GrupoUsuarioModel(registro))
     } catch (error) {
       this.logger.error(error)
@@ -50,7 +53,12 @@ export default class GrupoUsuarioPostgresRepository
 
   async incluir(pRegistro: GrupoUsuarioModel): Promise<GrupoUsuarioModel> {
     try {
+      validarUUID<GrupoUsuarioModel>(pRegistro.usuarioId, 'usuarioId')
+
+      validarUUID<GrupoUsuarioModel>(pRegistro.grupoId, 'grupoId')
+
       const registro = await this.repository.save(pRegistro)
+
       return new GrupoUsuarioModel(registro)
     } catch (error) {
       this.logger.error(error)
@@ -58,22 +66,24 @@ export default class GrupoUsuarioPostgresRepository
     }
   }
 
-  async excluir(pId: string): Promise<GrupoUsuarioModel | null> {
+  async excluir(pId: string): Promise<GrupoUsuarioModel[] | null> {
     try {
       validarUUID<GrupoUsuarioModel>(pId, 'id')
 
-      const registros = await this.repository.findBy({ id: pId })
+      const registros = await this.buscar({ grupoId: pId })
       if (!registros || registros.length === 0) {
         return null
       }
 
-      const { raw, affected } = await this.repository.delete(pId)
+      for (const registro of registros) {
+        const { raw, affected } = await this.repository.delete(registro.id)
 
-      if (affected === 0) {
-        return null
+        if (affected === 0) {
+          return null
+        }
       }
 
-      return new GrupoUsuarioModel(registros[0])
+      return registros.map((registro) => new GrupoUsuarioModel(registro))
     } catch (error) {
       this.logger.error(error)
       throw error

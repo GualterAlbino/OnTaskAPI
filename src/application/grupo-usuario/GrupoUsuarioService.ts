@@ -80,18 +80,27 @@ export default class GrupoUsuarioService {
     }
   }
 
-  async excluir(pId: string): Promise<GrupoUsuarioModel> {
+  async excluir(pId: string): Promise<GrupoUsuarioModel[]> {
     try {
-      const registro = await this.grupoUsuarioRepository.excluir(pId)
+      let registros = await this.grupoUsuarioRepository.buscar()
 
-      if (!registro) {
+      if (!registros || registros.length === 0) {
         throw new GrupoUsuarioNotFoundException(
           '',
           'Registro não encontrado para exclusão!'
         )
       }
 
-      return registro
+      const retorno = await this.grupoUsuarioRepository.excluir(pId)
+
+      if (!retorno) {
+        throw new GrupoUsuarioNotFoundException(
+          '',
+          'Registro não encontrado para exclusão!'
+        )
+      }
+
+      return retorno
     } catch (error) {
       this.logger.error(error)
       throw new GrupoUsuarioInternalServicException(

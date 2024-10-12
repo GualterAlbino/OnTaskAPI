@@ -34,7 +34,6 @@ export default class UsuarioPostgresRepository implements UsuarioRepository {
       const query = queryBuilderPostgres<UsuarioModel>(pParams)
 
       const usuarios = await this.usuarioRepository.find({ where: query })
-      console.log(usuarios)
 
       return usuarios.map((usuario) => new UsuarioModel(usuario))
     } catch (error) {

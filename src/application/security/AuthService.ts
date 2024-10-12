@@ -63,12 +63,13 @@ export default class AuthService {
 
       // Busca os grupos associados ao usuário
       const grupos = await this.grupoUsuarioService.buscar(
-        new QueryGrupoUsuarioDTO({ usuarioId: usuarios[0].id })
+        new QueryGrupoUsuarioDTO({
+          usuarioId: usuarios[0].id
+        })
       )
 
-      console.log(grupos)
-
       const token = this.gerarToken(usuarios[0], grupos)
+
       return new ResponseAuthDTO(token, new Date(), new Date())
     } catch (error) {
       this.logger.error(error)

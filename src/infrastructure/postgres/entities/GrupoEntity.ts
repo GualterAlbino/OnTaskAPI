@@ -4,7 +4,10 @@ import {
   CreateDateColumn,
   UpdateDateColumn,
   PrimaryGeneratedColumn,
-  Column
+  Column,
+  ManyToOne,
+  OneToMany,
+  JoinColumn
 } from 'typeorm'
 
 // Domain
@@ -15,7 +18,6 @@ import { cTABELA_GRUPO } from '../constants/ConstantesPostgres'
 
 // Entities
 import UsuarioEntity from './UsuarioEntity'
-
 @Entity({ name: cTABELA_GRUPO })
 export default class GrupoEntity implements TGrupoModel {
   @PrimaryGeneratedColumn('uuid')
@@ -27,10 +29,9 @@ export default class GrupoEntity implements TGrupoModel {
   @Column({ name: 'descricao', length: 255, nullable: false })
   descricao!: string
 
-  @ManyToMany(() => UsuarioEntity, (usuario) => usuario.id)
+  @Column({ name: 'usuarioResponsavelId', type: 'uuid' })
   usuarioResponsavelId!: string
 
-  // Padrão
   @CreateDateColumn({ name: 'criadoEm' })
   criadoEm!: Date
 

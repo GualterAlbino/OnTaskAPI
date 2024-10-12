@@ -8,15 +8,11 @@ export default class CriarGrupoDTO extends BaseDTO {
   @BaseDTO.Required
   descricao: string
 
-  @BaseDTO.Required
-  usuarioResponsavelId: string
-
   constructor(pObjeto: GrupoModel, pValidarCadastro: boolean = true) {
     super(pObjeto)
 
     this.nome = pObjeto.nome
     this.descricao = pObjeto.descricao
-    this.usuarioResponsavelId = pObjeto.usuarioResponsavelId
 
     if (pValidarCadastro) {
       BaseDTO.validate(this)
@@ -27,8 +23,7 @@ export default class CriarGrupoDTO extends BaseDTO {
     return new GrupoModel(
       {
         nome: this.nome,
-        descricao: this.descricao,
-        usuarioResponsavelId: this.usuarioResponsavelId
+        descricao: this.descricao
       },
       true
     ).toObject()

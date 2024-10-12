@@ -15,7 +15,7 @@ export function queryBuilderPostgres<T>(pParams: Partial<T>): Partial<T> {
       let value = (pParams as any)[key]
 
       if (key == 'id' && value) {
-        value = validarUUID(value, key)
+        validarUUID(value, key)
       }
 
       if (value !== undefined && value !== null) {

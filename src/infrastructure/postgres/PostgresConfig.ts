@@ -34,7 +34,8 @@ export default class PostgresConfig {
       username: databaseUsername,
       password: databasePassword,
       synchronize: true, // Cuidado com essa opção em produção
-      entities: [path.join(__dirname, './entities/*{.js,.ts}')]
+      entities: [path.join(__dirname, './entities/*{.js,.ts}')],
+      logging: false
     })
   }
 

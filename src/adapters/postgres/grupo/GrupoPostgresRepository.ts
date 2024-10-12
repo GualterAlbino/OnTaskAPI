@@ -26,6 +26,21 @@ export default class GrupoPostgresRepository implements GrupoRepository {
     this.repository = postgresConfig.getDataSource().getRepository(GrupoEntity)
   }
 
+  async incluir(pRegistro: GrupoModel): Promise<GrupoModel> {
+    try {
+      validarUUID<GrupoModel>(
+        pRegistro.usuarioResponsavelId,
+        'usuarioResponsavelId'
+      )
+
+      const registro = await this.repository.save(pRegistro)
+      return new GrupoModel(registro)
+    } catch (error) {
+      this.logger.error(error)
+      throw error
+    }
+  }
+
   // Método para buscar usuários
   async buscar(pParams: Partial<GrupoModel>): Promise<GrupoModel[]> {
     try {
@@ -33,19 +48,7 @@ export default class GrupoPostgresRepository implements GrupoRepository {
 
       const registros = await this.repository.find({ where: query })
 
-      console.log(registros)
-
       return registros.map((registro) => new GrupoModel(registro))
-    } catch (error) {
-      this.logger.error(error)
-      throw error
-    }
-  }
-
-  async incluir(pRegistro: GrupoModel): Promise<GrupoModel> {
-    try {
-      const registro = await this.repository.save(pRegistro)
-      return new GrupoModel(registro)
     } catch (error) {
       this.logger.error(error)
       throw error
