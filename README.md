@@ -1,12 +1,12 @@
 <div align="center">
   
- ## OnTask - Backend
+ ## OnTask - API
   
 </div>
 
 ## 📁 Informações do projeto:
 
-- O projeto se trata do backend da aplicação "OnTask", meu projeto de TCC da UniFagoc no ano de 2024. O projeto é um protótipo de uma ferramenta open source voltada para a gestão de projetos e tarefas. A solução proposta busca não apenas facilitar o mapeamento e controle das atividades, mas também fornecer dados relevantes para melhorar a estimativa de tempo em projetos futuros. A flexibilidade do sistema permitirá que empresas personalizem suas funcionalidades conforme suas necessidades específicas, garantindo sua adequação às demandas do mercado. Assim, o protótipo visa demonstrar sua viabilidade como uma ferramenta eficaz na promoção de uma gestão mais organizada e eficiente. 
+- O projeto neste repositorio se trata de uma API open source nomeada de "OnTask", um projeto de TCC realizado por mim no Centro Universitário Governador Ozanam Coelho - UNIFAGOC realizado ano de 2024. O problema de pesquisa gerador dessa proposta de solução ... O projeto é um protótipo de uma ferramenta open source voltada para a gestão de projetos e tarefas. A solução proposta busca não apenas facilitar o mapeamento e controle das atividades, mas também fornecer dados relevantes para melhorar a estimativa de tempo em projetos futuros. A flexibilidade do sistema permitirá que empresas personalizem suas funcionalidades conforme suas necessidades específicas, garantindo sua adequação às demandas do mercado. Assim, o protótipo visa demonstrar sua viabilidade como uma ferramenta eficaz na promoção de uma gestão mais organizada e eficiente. 
   
 <hr>
 
@@ -66,7 +66,7 @@ Ao clicar em salvar, se todos os dados estiverem corretos você conseguirá cone
 
 <div align="center">
   
-![ModeloDoBanco](./docs/OnTask(TCC)ModelagemDoBanco.png.png)
+![ModeloDoBanco](./docs/OnTask(TCC)ModelagemDoBanco.png)
 
 </div>
 <hr>
@@ -77,7 +77,7 @@ Ao clicar em salvar, se todos os dados estiverem corretos você conseguirá cone
 
 <div align="center">
   
-![Arquivo contendo as rotas (Contrato)](./docs/RotasOnTask.postman_collection)
+[Arquivo contendo as rotas (Contrato)](./docs/RotasOnTask.postman_collection)
 
 </div>
 
