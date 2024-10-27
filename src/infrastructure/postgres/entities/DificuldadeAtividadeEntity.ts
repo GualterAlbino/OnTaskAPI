@@ -34,10 +34,10 @@ export default class DificuldadeAtividadeEntity
   tempoMinutos!: number
 
   //Relacionamentos
-  @ManyToOne(() => ProjetoEntity, (projeto) => projeto.id)
+  @Column({ name: 'projetoId', type: 'uuid' })
   projetoId!: string
 
-  @ManyToOne(() => UsuarioEntity, (usuario) => usuario.id)
+  @Column({ name: 'usuarioId', type: 'uuid' })
   usuarioId!: string
 
   // Padrão

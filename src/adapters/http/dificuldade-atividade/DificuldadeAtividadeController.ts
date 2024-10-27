@@ -10,9 +10,11 @@ import QueryAtividadeDTO from '../../../application/atividade/dto/QueryAtividade
 import AtualizarAtividadeDTO from '../../../application/atividade/dto/AtualizarAtividadeDTO'
 
 import AtividadeHandler from './DificuldadeAtividadeHandler'
+import DificuldadeAtividadeHandler from './DificuldadeAtividadeHandler'
+import CriarDificuldadeAtividadeDTO from '../../../application/dificuldade-atividade/dto/CriarDificuldadeAtividadeDTO'
 
-export default class AtividadeController {
-  private atividadeHandler: AtividadeHandler
+export default class DificuldadeAtividadeController {
+  private atividadeHandler: DificuldadeAtividadeHandler
   private readonly logger = new Logger(this.constructor.name)
 
   constructor(pAtividadeHandler: AtividadeHandler) {
@@ -26,56 +28,12 @@ export default class AtividadeController {
   ): Promise<void> {
     try {
       const body = req.body
-      const dto = new CriarAtividadeDTO(body)
+      const dto = new CriarDificuldadeAtividadeDTO(body)
 
       console.log('pRegistro.toDomain()', dto)
 
       const retorno = await this.atividadeHandler.incluir(dto)
       res.status(201).send(retorno)
-    } catch (error) {
-      this.logger.error(error)
-      next(error)
-    }
-  }
-
-  async buscar(req: Request, res: Response, next: NextFunction): Promise<void> {
-    try {
-      const queryParams = new QueryAtividadeDTO(req.body)
-      const tasks = await this.atividadeHandler.buscar(queryParams)
-      res.status(200).json(tasks)
-    } catch (error) {
-      this.logger.error(error)
-      next(error)
-    }
-  }
-
-  async excluir(
-    req: Request,
-    res: Response,
-    next: NextFunction
-  ): Promise<void> {
-    try {
-      const params = req.params
-      const retorno = await this.atividadeHandler.excluir(params.id)
-      res.status(200).send(retorno)
-    } catch (error) {
-      this.logger.error(error)
-      next(error)
-    }
-  }
-
-  async atualizar(
-    req: Request,
-    res: Response,
-    next: NextFunction
-  ): Promise<void> {
-    try {
-      const params = req.params
-      const body = req.body
-      const dto = new AtualizarAtividadeDTO(body)
-
-      const retorno = await this.atividadeHandler.atualizar(params.id, dto)
-      res.status(200).send(retorno)
     } catch (error) {
       this.logger.error(error)
       next(error)

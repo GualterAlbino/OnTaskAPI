@@ -5,55 +5,24 @@ import QueryAtividadeDTO from '../../../application/atividade/dto/QueryAtividade
 import ListarAtividadeDTO from '../../../application/atividade/dto/ListarAtividadeDTO'
 import AtualizarAtividadeDTO from '../../../application/atividade/dto/AtualizarAtividadeDTO'
 
+import DificuldadeAtividadeService from '../../../application/dificuldade-atividade/DificuldadeAtividadeService'
+
 // Shared
 import Logger from '../../../shared/utils/Logger'
+import CriarDificuldadeAtividadeDTO from '../../../application/dificuldade-atividade/dto/CriarDificuldadeAtividadeDTO'
 
-export default class AtividadeHandler {
-  private atividadeService: AtividadeService
+export default class DificuldadeAtividadeHandler {
+  private readonly atividadeService: DificuldadeAtividadeService
   private readonly logger = new Logger(this.constructor.name)
 
-  constructor(pAtividadeService: AtividadeService) {
+  constructor(pAtividadeService: DificuldadeAtividadeService) {
     this.atividadeService = pAtividadeService
   }
 
-  async incluir(pRegistro: CriarAtividadeDTO): Promise<ListarAtividadeDTO> {
+  async incluir(pRegistro: CriarDificuldadeAtividadeDTO): Promise<any> {
     try {
-      const usuario = await this.atividadeService.incluir(pRegistro)
-      return new ListarAtividadeDTO(usuario)
-    } catch (error) {
-      this.logger.error(error)
-      throw error
-    }
-  }
-
-  async buscar(pParams: QueryAtividadeDTO): Promise<ListarAtividadeDTO[]> {
-    try {
-      // Passa os parâmetros de busca para o serviço
-      const usuarios = await this.atividadeService.buscar(pParams)
-      return usuarios.map((usuario) => new ListarAtividadeDTO(usuario))
-    } catch (error) {
-      this.logger.error(error)
-      throw error
-    }
-  }
-
-  async excluir(pId: string): Promise<ListarAtividadeDTO> {
-    try {
-      const usuario = await this.atividadeService.excluir(pId)
-      return new ListarAtividadeDTO(usuario)
-    } catch (error) {
-      this.logger.error(error)
-      throw error
-    }
-  }
-
-  async atualizar(
-    pId: string,
-    pRegistro: AtualizarAtividadeDTO
-  ): Promise<ListarAtividadeDTO> {
-    try {
-      const usuario = await this.atividadeService.atualizar(pId, pRegistro)
-      return new ListarAtividadeDTO(usuario)
+      const registro = await this.atividadeService.incluir(pRegistro)
+      return registro
     } catch (error) {
       this.logger.error(error)
       throw error

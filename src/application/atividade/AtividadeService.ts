@@ -46,6 +46,7 @@ export default class AtividadeService {
   async incluir(pRegistro: CriarAtividadeDTO): Promise<AtividadeModel> {
     try {
       // Verirfica se o usuário existe
+      /*
       const usuarios = await this.usuarioService.buscar(
         new QueryUsuarioDTO({ id: pRegistro.usuarioId })
       )
@@ -79,7 +80,7 @@ export default class AtividadeService {
       if (!status) {
         throw new AtividadeNotFoundException('', 'Registro não encontrado!')
       }
-
+   */
       const registro = await this.repository.incluir(pRegistro.toDomain())
 
       return registro
