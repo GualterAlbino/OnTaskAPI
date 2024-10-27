@@ -18,6 +18,8 @@ import GrupoRoutes from './routes/GrupoRoutes'
 import ProjetoRoutes from './routes/ProjetoRoutes'
 import TipoAtividadeRoutes from './routes/TipoAtividadeRoutes'
 import AtividadeRoutes from './routes/AtividadeRoutes'
+import DificuldadeAtividade from './routes/DificuldadeAtividade'
+import PermissaoUsuarioProjeto from './routes/PermissaoUsuarioProjeto'
 
 export default class ExpressConfig {
   private readonly porta: number
@@ -67,6 +69,9 @@ export default class ExpressConfig {
     this.app.use(`${basePath}/atividade`, AtividadeRoutes)
     this.app.use(`${basePath}/tipoStatus`, TipoStatusRoutes)
     this.app.use(`${basePath}/tipoAtividade`, TipoAtividadeRoutes)
+    this.app.use(`${basePath}/permissaoProjeto`, PermissaoUsuarioProjeto)
+    this.app.use(`${basePath}/dificuldadeAtividade`, DificuldadeAtividade)
+
     // ...
 
     this.app.get('/', (req, res) => {

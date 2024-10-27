@@ -22,7 +22,7 @@ const tipoAtividadeController = new TipoAtividadeController(
  * /tipoAtividade:
  *   get:
  *     summary: Lista todos os registros
- *     tags: [TipoAtividade]
+ *     tags: [Tipo de Atividade]
  */
 TipoAtividadeRoutes.get('/', authMiddleware, (req, res, next) =>
   tipoAtividadeController.buscar(req, res, next)
@@ -33,7 +33,7 @@ TipoAtividadeRoutes.get('/', authMiddleware, (req, res, next) =>
  * /tipoAtividade:
  *   post:
  *     summary: Cria um registro
- *     tags: [TipoAtividade]
+ *     tags: [Tipo de Atividade]
  */
 TipoAtividadeRoutes.post('/', authMiddleware, (req, res, next) =>
   tipoAtividadeController.incluir(req, res, next)
@@ -44,7 +44,7 @@ TipoAtividadeRoutes.post('/', authMiddleware, (req, res, next) =>
  * /tipoAtividade/{id}:
  *   delete:
  *     summary: Exclui um registro
- *     tags: [TipoAtividade]
+ *     tags: [Tipo de Atividade]
  */
 TipoAtividadeRoutes.delete('/:id', authMiddleware, (req, res, next) =>
   tipoAtividadeController.excluir(req, res, next)
@@ -55,7 +55,7 @@ TipoAtividadeRoutes.delete('/:id', authMiddleware, (req, res, next) =>
  * /tipoAtividade/{id}:
  *   patch:
  *     summary: Atualiza um registro
- *     tags: [TipoAtividade]
+ *     tags: [Tipo de Atividade]
  */
 TipoAtividadeRoutes.patch('/:id', authMiddleware, (req, res, next) =>
   tipoAtividadeController.atualizar(req, res, next)

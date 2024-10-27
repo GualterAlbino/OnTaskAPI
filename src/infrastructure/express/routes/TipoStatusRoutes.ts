@@ -21,7 +21,7 @@ const tipoStatusController = new TipoStatusController(tipoStatusHandler)
  * /tipoStatus:
  *   get:
  *     summary: Lista todos os registros
- *     tags: [TipoStatus]
+ *     tags: [Tipo de Status]
  */
 TipoStatusRoutes.get('/', authMiddleware, (req, res, next) =>
   tipoStatusController.buscar(req, res, next)
@@ -32,7 +32,7 @@ TipoStatusRoutes.get('/', authMiddleware, (req, res, next) =>
  * /tipoStatus:
  *   post:
  *     summary: Cria um registro
- *     tags: [TipoStatus]
+ *     tags: [Tipo de Status]
  */
 TipoStatusRoutes.post('/', authMiddleware, (req, res, next) =>
   tipoStatusController.incluir(req, res, next)
@@ -43,7 +43,7 @@ TipoStatusRoutes.post('/', authMiddleware, (req, res, next) =>
  * /tipoStatus/{id}:
  *   delete:
  *     summary: Exclui um registro
- *     tags: [TipoStatus]
+ *     tags: [Tipo de Status]
  */
 TipoStatusRoutes.delete('/:id', authMiddleware, (req, res, next) =>
   tipoStatusController.excluir(req, res, next)
@@ -54,7 +54,7 @@ TipoStatusRoutes.delete('/:id', authMiddleware, (req, res, next) =>
  * /tipoStatus/{id}:
  *   patch:
  *     summary: Atualiza um registro
- *     tags: [TipoStatus]
+ *     tags: [Tipo de Status]
  */
 TipoStatusRoutes.patch('/:id', authMiddleware, (req, res, next) =>
   tipoStatusController.atualizar(req, res, next)
