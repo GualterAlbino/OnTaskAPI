@@ -1,0 +1,1456 @@
+{
+	"info": {
+		"_postman_id": "bbff3c3e-41ea-49f0-983e-3ebeb56540c2",
+		"name": "OnTask",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "24513123"
+	},
+	"item": [
+		{
+			"name": "Usuario",
+			"item": [
+				{
+					"name": "Criar Usuario",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"\r",
+									"// Extrai o valor de token_Acesso da resposta\r",
+									"var valor = pm.response.json().id;\r",
+									"\r",
+									"// Atribui o valor a uma variável de coleção chamada 'tokenAcesso'\r",
+									"pm.collectionVariables.set(\"UsuarioId\", valor);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Gualter\",\r\n    \"email\": \"gualter++@gmail.com\",\r\n    \"senha\": \"123\",\r\n    \"role\": \"DESENVOLVEDOR\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Host}}/v1/usuario",
+							"host": [
+								"{{Host}}"
+							],
+							"path": [
+								"v1",
+								"usuario"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar Usuario",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n   \"nome\": \"Gualter\",\r\n   \"email\": \"gualter@gmail.com\",\r\n   \"senha\": \"1234\",\r\n   \"codigoCliente\": 1000,\r\n   \"descricaoCliente\": \"Tek-System\",\r\n   \"role\": \"Super\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Host}}/v1/usuario/ae9cb5d6-4a31-49be-93f3-47b3e46485c8",
+							"host": [
+								"{{Host}}"
+							],
+							"path": [
+								"v1",
+								"usuario",
+								"ae9cb5d6-4a31-49be-93f3-47b3e46485c8"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar Usuario",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Host}}/v1/usuario",
+							"host": [
+								"{{Host}}"
+							],
+							"path": [
+								"v1",
+								"usuario"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Excluir Usuario",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{Host}}/v1/usuario/730b8306-1e3d-42f6-bbeb-ce91a3ad1f58",
+							"host": [
+								"{{Host}}"
+							],
+							"path": [
+								"v1",
+								"usuario",
+								"730b8306-1e3d-42f6-bbeb-ce91a3ad1f58"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Tipo Status",
+			"item": [
+				{
+					"name": "Criar",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"// Extrai o valor de token_Acesso da resposta\r",
+									"var valor = pm.response.json().id;\r",
+									"\r",
+									"// Atribui o valor a uma variável de coleção chamada 'tokenAcesso'\r",
+									"pm.collectionVariables.set(\"TipoStatusId\", valor);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"grupoId\": \"{{GrupoId}}\",\r\n    \"tipo\": \"PROJETO\",\r\n    \"descricao\": \"Refere-se aos projetos individualmente.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Host}}/v1/tipoStatus",
+							"host": [
+								"{{Host}}"
+							],
+							"path": [
+								"v1",
+								"tipoStatus"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"tipo\": \"PENDENTE\",\r\n    \"descricao\": \"Indica que a tarefa está pendente\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Host}}/v1/tipoStatus/9225c2ce-f790-4aae-92e8-73b98d370d13",
+							"host": [
+								"{{Host}}"
+							],
+							"path": [
+								"v1",
+								"tipoStatus",
+								"9225c2ce-f790-4aae-92e8-73b98d370d13"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Host}}/v1/tipoStatus",
+							"host": [
+								"{{Host}}"
+							],
+							"path": [
+								"v1",
+								"tipoStatus"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Excluir",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{Host}}/v1/tipoStatus/553a0137-4252-4fdc-98c4-9b9dfec47ab1",
+							"host": [
+								"{{Host}}"
+							],
+							"path": [
+								"v1",
+								"tipoStatus",
+								"553a0137-4252-4fdc-98c4-9b9dfec47ab1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Tipo Atividade",
+			"item": [
+				{
+					"name": "Criar",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"var valor = pm.response.json().id;\r",
+									"\r",
+									"// Atribui o valor a uma variável de coleção chamada 'tokenAcesso'\r",
+									"pm.collectionVariables.set(\"TipoAtividadeId\", valor);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Planejamento\",\r\n    \"grupoId\": \"{{GrupoId}}\",\r\n    \"descricao\": \"Etapa que precede a implementação\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Host}}/v1/tipoAtividade",
+							"host": [
+								"{{Host}}"
+							],
+							"path": [
+								"v1",
+								"tipoAtividade"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Planejamento\",\r\n    \"descricao\": \"Etapa que precede a implementação\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Host}}/v1/tipoAtividade/97717e3a-f740-4fb5-8828-f537cfa1a620",
+							"host": [
+								"{{Host}}"
+							],
+							"path": [
+								"v1",
+								"tipoAtividade",
+								"97717e3a-f740-4fb5-8828-f537cfa1a620"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Host}}/v1/tipoAtividade",
+							"host": [
+								"{{Host}}"
+							],
+							"path": [
+								"v1",
+								"tipoAtividade"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Excluir",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{Host}}/v1/tipoAtividade/97717e3a-f740-4fb5-8828-f537cfa1a620",
+							"host": [
+								"{{Host}}"
+							],
+							"path": [
+								"v1",
+								"tipoAtividade",
+								"97717e3a-f740-4fb5-8828-f537cfa1a620"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Dificuldade Atividade",
+			"item": [
+				{
+					"name": "Criar",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"var valor = pm.response.json()._id;\r",
+									"\r",
+									"// Atribui o valor a uma variável de coleção chamada 'tokenAcesso'\r",
+									"pm.collectionVariables.set(\"DificuldadeAtividadeId\", valor);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Complexa\",\r\n    \"projetoId\": \"{{ProjetoId}}\",\r\n    \"usuarioId\": \"{{UsuarioId}}\",\r\n    \"tempoMinutos\": 360,\r\n    \"descricao\": \"Etapa que exige análise e implementação cuidadosa.\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Host}}/v1/dificuldadeAtividade",
+							"host": [
+								"{{Host}}"
+							],
+							"path": [
+								"v1",
+								"dificuldadeAtividade"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Planejamento\",\r\n    \"descricao\": \"Etapa que precede a implementação\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Host}}/v1/tipoAtividade/97717e3a-f740-4fb5-8828-f537cfa1a620",
+							"host": [
+								"{{Host}}"
+							],
+							"path": [
+								"v1",
+								"tipoAtividade",
+								"97717e3a-f740-4fb5-8828-f537cfa1a620"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Host}}/v1/tipoAtividade",
+							"host": [
+								"{{Host}}"
+							],
+							"path": [
+								"v1",
+								"tipoAtividade"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Excluir",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{Host}}/v1/tipoAtividade/97717e3a-f740-4fb5-8828-f537cfa1a620",
+							"host": [
+								"{{Host}}"
+							],
+							"path": [
+								"v1",
+								"tipoAtividade",
+								"97717e3a-f740-4fb5-8828-f537cfa1a620"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Atividade",
+			"item": [
+				{
+					"name": "Criar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"usuarioId\": \"{{UsuarioId}}\",\r\n    \"projetoId\": \"{{ProjetoId}}\",\r\n    \"statusId\": \"{{StatusId}}\",\r\n    \"tipoAtividadeId\": \"{{TipoAtividadeId}}\",\r\n    \"dificuldadeAtividadeId\": \"{{DificuldadeAtividadeId}}\",\r\n    \"nome\": \"Modelagem do Banco\",\r\n    \"descricao\": \"Realizar a modelagem do banco de dados\",\r\n    \"previsaoInicio\": \"2024-10-12T16:29:41.049Z\",\r\n    \"previsaoTermino\": \"2024-10-12T16:29:41.049Z\",\r\n    \"inicio\": \"2024-10-12T16:29:41.049Z\",\r\n    \"termino\": \"2024-10-12T16:29:41.049Z\",\r\n    \"tempoEstimadoMinutos\": 360,\r\n    \"emExecucao\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Host}}/v1/atividade",
+							"host": [
+								"{{Host}}"
+							],
+							"path": [
+								"v1",
+								"atividade"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"34a95b2e-9946-4028-aada-3bba7aef98e5\",\r\n    \"criadoEm\": \"2024-10-12T17:37:41.544Z\",\r\n    \"alteradoEm\": \"2024-10-12T17:37:41.544Z\",\r\n    \"usuarioId\": \"73557bba-451e-4a45-8267-f67b758779aa\",\r\n    \"projetoId\": \"e208290e-90d9-47b9-aaff-4c7b5d7189aa\",\r\n    \"statusId\": \"1fd5e763-14f2-4d59-8e6a-3324a5ccd94e\",\r\n    \"tipoAtividadeId\": \"8a7b0ec3-bef7-40e0-8d3d-49253adf33a7\",\r\n    \"dificuldadeAtividadeId\": \"8a7b0ec3-bef7-40e0-8d3d-49253adf33a7\",\r\n    \"nome\": \"Modelagem do Banco\",\r\n    \"descricao\": \"Realizar a modelagem do banco de dados\",\r\n    \"previsaoInicio\": \"2024-10-12T16:29:41.049Z\",\r\n    \"previsaoTermino\": \"2024-10-12T16:29:41.049Z\",\r\n    \"inicio\": \"2024-10-12T16:29:41.049Z\",\r\n    \"termino\": \"2024-10-12T16:29:41.049Z\",\r\n    \"tempoEstimadoMinutos\": 360,\r\n    \"emExecucao\": false\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Host}}/v1/atividade/34a95b2e-9946-4028-aada-3bba7aef98e5",
+							"host": [
+								"{{Host}}"
+							],
+							"path": [
+								"v1",
+								"atividade",
+								"34a95b2e-9946-4028-aada-3bba7aef98e5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Host}}/v1/atividade",
+							"host": [
+								"{{Host}}"
+							],
+							"path": [
+								"v1",
+								"atividade"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Excluir",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{Host}}/v1/atividade/97717e3a-f740-4fb5-8828-f537cfa1a620",
+							"host": [
+								"{{Host}}"
+							],
+							"path": [
+								"v1",
+								"atividade",
+								"97717e3a-f740-4fb5-8828-f537cfa1a620"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Status",
+			"item": [
+				{
+					"name": "Criar",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"\r",
+									"\r",
+									"var valor = pm.response.json().id;\r",
+									"\r",
+									"pm.collectionVariables.set(\"StatusId\", valor);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"usuarioId\": \"{{UsuarioId}}\",\r\n    \"grupoId\": \"{{GrupoId}}\",\r\n    \"tipoStatusId\": \"{{TipoStatusId}}\",\r\n    \"status\": \"ATIVO\",\r\n    \"descricao\": \"Indica que o registro está sendo usado\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Host}}/v1/status",
+							"host": [
+								"{{Host}}"
+							],
+							"path": [
+								"v1",
+								"status"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"usuarioId\": \"ae9cb5d6-4a31-49be-93f3-47b3e46485c8\",\r\n    \"tipoStatusId\": \"9225c2ce-f790-4aae-92e8-73b98d370d13\",\r\n    \"status\": \"ATIVO\",\r\n    \"descricao\": \"Indica que o registro está sendo usado\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Host}}/v1/status/9225c2ce-f790-4aae-92e8-73b98d370d13",
+							"host": [
+								"{{Host}}"
+							],
+							"path": [
+								"v1",
+								"status",
+								"9225c2ce-f790-4aae-92e8-73b98d370d13"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Host}}/v1/status",
+							"host": [
+								"{{Host}}"
+							],
+							"path": [
+								"v1",
+								"status"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Excluir",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{Host}}/v1/status/553a0137-4252-4fdc-98c4-9b9dfec47ab1",
+							"host": [
+								"{{Host}}"
+							],
+							"path": [
+								"v1",
+								"status",
+								"553a0137-4252-4fdc-98c4-9b9dfec47ab1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Grupo",
+			"item": [
+				{
+					"name": "Criar",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"\r",
+									"// Extrai o valor de token_Acesso da resposta\r",
+									"var valor = pm.response.json().id;\r",
+									"\r",
+									"// Atribui o valor a uma variável de coleção chamada 'tokenAcesso'\r",
+									"pm.collectionVariables.set(\"GrupoId\", valor);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"OnTask\",\r\n    \"usuarioResponsavelId\": \"{{UsuarioId}}\",\r\n    \"descricao\": \"Grupo de projetos relacionados ao OnTask\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Host}}/v1/grupo",
+							"host": [
+								"{{Host}}"
+							],
+							"path": [
+								"v1",
+								"grupo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"AAA\",\r\n    \"usuarioResponsavelId\": \"168e1f5a-15e4-4114-9f51-04d7ae700e03\",\r\n    \"descricao\": \"Indica que o registro está sendo usado\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Host}}/v1/grupo/813a469e-6941-4520-9af6-994389188db0",
+							"host": [
+								"{{Host}}"
+							],
+							"path": [
+								"v1",
+								"grupo",
+								"813a469e-6941-4520-9af6-994389188db0"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Host}}/v1/grupo",
+							"host": [
+								"{{Host}}"
+							],
+							"path": [
+								"v1",
+								"grupo"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Excluir",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{Host}}/v1/grupo/795e081c-a7ac-4709-b53b-600c1c3c7a15",
+							"host": [
+								"{{Host}}"
+							],
+							"path": [
+								"v1",
+								"grupo",
+								"795e081c-a7ac-4709-b53b-600c1c3c7a15"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Projeto",
+			"item": [
+				{
+					"name": "Criar",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"\r",
+									"// Extrai o valor de token_Acesso da resposta\r",
+									"var valor = pm.response.json().id;\r",
+									"\r",
+									"// Atribui o valor a uma variável de coleção chamada 'tokenAcesso'\r",
+									"pm.collectionVariables.set(\"ProjetoId\", valor);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"statusId\": \"{{StatusId}}\",\r\n    \"grupoId\": \"{{GrupoId}}\",\r\n    \"usuarioResponsavelId\": \"{{UsuarioId}}\",\r\n    \"nome\": \"Projeto OnTask\",\r\n    \"descricao\": \"Um projeto gerenciador de tarefas\",\r\n    \"inicio\": \"2024-10-12T14:57:11.888Z\",\r\n    \"termino\": \"2024-10-12T14:57:11.888Z\",\r\n    \"logo\": \"-\",\r\n    \"previsaoInicio\": \"\",\r\n    \"previsaoTermino\": \"\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Host}}/v1/projeto",
+							"host": [
+								"{{Host}}"
+							],
+							"path": [
+								"v1",
+								"projeto"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Atualizar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PATCH",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"e208290e-90d9-47b9-aaff-4c7b5d7189aa\",\r\n    \"criadoEm\": \"2024-10-12T16:03:49.646Z\",\r\n    \"alteradoEm\": \"2024-10-12T16:03:49.646Z\",\r\n    \"nome\": \"Projeto OnTask\",\r\n    \"descricao\": \"Um projeto gerenciador de tarefas\",\r\n    \"inicio\": \"2024-10-12T14:57:11.888Z\",\r\n    \"termino\": \"2024-10-12T14:57:11.888Z\",\r\n    \"statusId\": \"1fd5e763-14f2-4d59-8e6a-3324a5ccd94e\",\r\n    \"logo\": \"a\",\r\n    \"previsaoInicio\": \"2024-10-12T16:03:49.646Z\",\r\n    \"previsaoTermino\": \"2024-10-12T16:03:49.646Z\",\r\n    \"usuarioResponsavelId\": \"73557bba-451e-4a45-8267-f67b758779aa\",\r\n    \"grupoId\": \"e95562fd-8447-4412-9896-c3dd3047b663\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Host}}/v1/projeto/e208290e-90d9-47b9-aaff-4c7b5d7189aa",
+							"host": [
+								"{{Host}}"
+							],
+							"path": [
+								"v1",
+								"projeto",
+								"e208290e-90d9-47b9-aaff-4c7b5d7189aa"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Buscar",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Host}}/v1/projeto",
+							"host": [
+								"{{Host}}"
+							],
+							"path": [
+								"v1",
+								"projeto"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Excluir",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{Token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{Host}}/v1/projeto/795e081c-a7ac-4709-b53b-600c1c3c7a15",
+							"host": [
+								"{{Host}}"
+							],
+							"path": [
+								"v1",
+								"projeto",
+								"795e081c-a7ac-4709-b53b-600c1c3c7a15"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									"\r",
+									"// Extrai o valor de token_Acesso da resposta\r",
+									"var tokenAcesso = pm.response.json().token;\r",
+									"\r",
+									"// Atribui o valor a uma variável de coleção chamada 'tokenAcesso'\r",
+									"pm.collectionVariables.set(\"Token\", tokenAcesso);"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\": \"gualter@gmail.com\",\r\n    \"senha\": \"123\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{Host}}/v1/auth/login",
+							"host": [
+								"{{Host}}"
+							],
+							"path": [
+								"v1",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Rota Base",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{Host}}",
+					"host": [
+						"{{Host}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "Host",
+			"value": "http://localhost:3005",
+			"type": "string"
+		},
+		{
+			"key": "Token",
+			"value": ""
+		},
+		{
+			"key": "GrupoId",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "UsuarioId",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "ProjetoId",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "TarefaId",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "TipoStatusId",
+			"value": ""
+		},
+		{
+			"key": "StatusId",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "TipoAtividadeId",
+			"value": ""
+		},
+		{
+			"key": "DificuldadeAtividadeId",
+			"value": ""
+		}
+	]
+}
